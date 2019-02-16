@@ -1,0 +1,26 @@
+{
+  "name": "watchercatbot",
+  "version": "1.0.0",
+  "description": "\"The distro watcher cat\"",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "watch": "./node_modules/nodemon/bin/nodemon.js bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update-distros-data": "node scripts/updateDistrosData.js && node ./node_modules/prettier/bin-prettier.js --write data/distros.json"
+  },
+  "author": "Caglar Turali",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^6.2.0",
+    "node-telegram-bot-api": "^0.30.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10",
+    "prettier": "^1.16.4"
+  }
+}
