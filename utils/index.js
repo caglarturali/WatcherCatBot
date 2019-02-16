@@ -96,7 +96,7 @@ const getDistroPopularity = distroObj => {
       resultObj = {
         rank: resultArr[0].trim(),
         hits: resultArr[1].substring(
-          resultArr[1].indexOf('('),
+          resultArr[1].indexOf('(') + 1,
           resultArr[1].indexOf(')')
         )
       };
