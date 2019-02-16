@@ -48,34 +48,38 @@ bot.on('inline_query', query => {
       pendingQueries.push(utils.getDistroPopularity(match));
     });
 
-    Promise.all(pendingQueries).then(values => {
-      // Sort by last 6 months' popularity data.
-      values.sort((a, b) => {
-        return a.popularity['6months'].rank - b.popularity['6months'].rank;
-      });
+    Promise.all(pendingQueries)
+      .then(values => {
+        // Sort by last 6 months' popularity data.
+        values.sort((a, b) => {
+          return a.popularity['6months'].rank - b.popularity['6months'].rank;
+        });
 
-      bot.answerInlineQuery(
-        query.id,
-        values.map(distroData => ({
-          type: 'article',
-          id: uuid(),
-          title: distroData.distro.distro_name,
-          url: utils.getDistroUrl(distroData.distro.url_name),
-          hide_url: true,
-          description:
-            distroData.popularity['6months'].rank +
-            '\n' +
-            distroData.popularity['6months'].hits,
-          thumb_url: utils.getLogoUrl(distroData.distro.url_name),
-          input_message_content: {
-            message_text: JSON.stringify(distroData.popularity),
-            parse_mode: 'Markdown',
-            disable_web_page_preview: false
-          }
-        })),
-        { cache_time: 30 }
-      );
-    });
+        bot.answerInlineQuery(
+          query.id,
+          values.map(distroData => ({
+            type: 'article',
+            id: uuid(),
+            title: distroData.distro.distro_name,
+            url: utils.getDistroUrl(distroData.distro.url_name),
+            hide_url: true,
+            description:
+              distroData.popularity['6months'].rank +
+              '\n' +
+              distroData.popularity['6months'].hits,
+            thumb_url: utils.getLogoUrl(distroData.distro.url_name),
+            input_message_content: {
+              message_text: JSON.stringify(distroData.popularity),
+              parse_mode: 'Markdown',
+              disable_web_page_preview: false
+            }
+          })),
+          { cache_time: 30 }
+        );
+      })
+      .catch(e => {
+        console.log(e.message);
+      });
   } else {
     bot.sendMessage(query.id, [
       {
