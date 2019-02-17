@@ -1,14 +1,9 @@
 require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
 const distrosData = require('./data/distros.json');
 const scrape = require('./utils/scrape');
 const respond = require('./utils/respond');
 const strings = require('./strings');
-
-const app = express();
-const port = process.env.PORT || 443;
 
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const options = {
@@ -18,7 +13,7 @@ const options = {
   }
 };
 
-const url = 'https://watchercatbot.now.sh/';
+const url = process.env.NOW_URL;
 
 // Create a bot that uses 'polling' to fetch new updates.
 const bot = new TelegramBot(TOKEN, options);
@@ -26,16 +21,6 @@ const bot = new TelegramBot(TOKEN, options);
 // This informs the Telegram servers of the new webhook.
 // Note: we do not need to pass in the cert, as it already provided
 bot.setWebHook(`${url}/bot${TOKEN}`);
-
-app.use(bodyParser.json());
-app.post(`/bot${TOKEN}`, (req, res) => {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
-});
-
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
 
 // Listen for any kind of message.
 bot.on('message', msg => {
