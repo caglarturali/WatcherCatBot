@@ -5,10 +5,21 @@ const scrape = require('./utils/scrape');
 const respond = require('./utils/respond');
 const strings = require('./strings');
 
-const token = process.env.TELEGRAM_TOKEN;
+const TOKEN = process.env.TELEGRAM_TOKEN;
+const options = {
+  webHook: {
+    // Just use 443 directly
+    port: 443
+  }
+};
+const url = process.env.NOW_URL;
 
 // Create a bot that uses 'polling' to fetch new updates.
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(TOKEN, options);
+
+// This informs the Telegram servers of the new webhook.
+// Note: we do not need to pass in the cert, as it already provided
+bot.setWebHook(`${url}/bot${TOKEN}`);
 
 // Listen for any kind of message.
 bot.on('message', msg => {
