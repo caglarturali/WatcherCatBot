@@ -1,3 +1,7 @@
+/**
+ * Web scraping related utility methods.
+ */
+
 const request = require('request-promise');
 const cheerio = require('cheerio');
 
@@ -46,6 +50,7 @@ const getDistroPopularity = distroObj => {
           .children();
       })
       .then(data => {
+        // Extract necessary info.
         let dataStr = data.text();
         dataStr = dataStr.substring(
           dataStr.lastIndexOf('Popularity'),

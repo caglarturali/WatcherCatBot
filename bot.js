@@ -1,16 +1,15 @@
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
-const uuid = require('uuid/v4');
 const distrosData = require('./data/distros.json');
-const utils = require('./utils');
+const scrape = require('./utils/scrape');
+const respond = require('./utils/respond');
 
 const token = process.env.TELEGRAM_TOKEN;
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
 
-// Listen for any kind of message. There are different kinds of
-// messages.
+// Listen for any kind of message.
 bot.on('message', msg => {
   const chatId = msg.chat.id;
 
@@ -29,7 +28,7 @@ bot.on('inline_query', query => {
   console.log(query);
 
   if (query.query === '') {
-    return;
+    return respond.sendStaticResponse(bot, query);
   }
 
   let matches = distrosData.filter(distroData => {
@@ -45,55 +44,17 @@ bot.on('inline_query', query => {
   pendingQueries = [];
   if (matches.length > 0) {
     matches.forEach(match => {
-      pendingQueries.push(utils.getDistroPopularity(match));
+      pendingQueries.push(scrape.getDistroPopularity(match));
     });
 
     Promise.all(pendingQueries)
-      .then(values => {
-        // Sort by last 6 months' popularity data.
-        values.sort((a, b) => {
-          return a.popularity['6months'].rank - b.popularity['6months'].rank;
-        });
-
-        bot.answerInlineQuery(
-          query.id,
-          values.map(distroData => ({
-            type: 'article',
-            id: uuid(),
-            title: distroData.distro.distro_name,
-            url: utils.getDistroUrl(distroData.distro.url_name),
-            hide_url: true,
-            description:
-              distroData.popularity['6months'].rank +
-              '\n' +
-              distroData.popularity['6months'].hits,
-            thumb_url: utils.getLogoUrl(distroData.distro.url_name),
-            input_message_content: {
-              message_text: JSON.stringify(distroData.popularity),
-              parse_mode: 'Markdown',
-              disable_web_page_preview: false
-            }
-          })),
-          { cache_time: 30 }
-        );
-      })
+      .then(results => respond.formatAndSendQueryResults(bot, query, results))
       .catch(e => {
         console.log(e.message);
+        respond.sendStaticResponse(bot, query);
       });
   } else {
-    bot.sendMessage(query.id, [
-      {
-        type: 'article',
-        id: uuid(),
-        thumb_url: '',
-        title: ':(',
-        input_message_content: {
-          message_text: "I can't find the distro you're looking for",
-          parse_mode: 'Markdown',
-          disable_web_page_preview: false
-        }
-      }
-    ]);
+    respond.sendStaticResponse(bot, query);
   }
 });
 
