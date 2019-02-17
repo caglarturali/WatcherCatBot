@@ -18,21 +18,23 @@ const options = {
   }
 };
 
-const url = process.env.NOW_URL;
-const path = `bot${TOKEN}`;
+const url = 'https://watchercatbot.now.sh/';
 
 // Create a bot that uses 'polling' to fetch new updates.
 const bot = new TelegramBot(TOKEN, options);
 
 // This informs the Telegram servers of the new webhook.
 // Note: we do not need to pass in the cert, as it already provided
-bot.setWebHook(`${url}/${path}`);
+bot.setWebHook(`${url}/bot${TOKEN}`);
 
-app.listen(port);
 app.use(bodyParser.json());
-app.post(path, (req, res) => {
+app.post(`/bot${TOKEN}`, (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
+});
+
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
 });
 
 // Listen for any kind of message.
