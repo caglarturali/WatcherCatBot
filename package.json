@@ -9,14 +9,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "update-distros-data": "node scripts/updateDistrosData.js && node ./node_modules/prettier/bin-prettier.js --write data/distros.json"
   },
-  "engines": {
-    "node": "8.10.0"
-  },
   "author": "Caglar Turali",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^6.2.0",
+    "express": "^4.16.4",
     "node-telegram-bot-api": "^0.30.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
