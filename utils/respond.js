@@ -58,7 +58,7 @@ const formatAndSendQueryResults = (bot, query, results) => {
           }
         };
       },
-      { cache_time: 0 }
+      { cache_time: 60 }
     )
   );
 };
