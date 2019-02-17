@@ -10,7 +10,7 @@
     "update-distros-data": "node scripts/updateDistrosData.js && node ./node_modules/prettier/bin-prettier.js --write data/distros.json"
   },
   "engines": {
-    "node": "11.6.0"
+    "node": "8.10.0"
   },
   "author": "Caglar Turali",
   "license": "ISC",
