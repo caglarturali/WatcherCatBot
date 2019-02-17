@@ -49,10 +49,7 @@ const formatAndSendQueryResults = (bot, query, results) => {
           title: distroData.distro.distro_name,
           url: scrape.getDistroUrl(distroData.distro.url_name),
           hide_url: true,
-          description:
-            distroData.popularity['6months'].rank +
-            '\n' +
-            distroData.popularity['6months'].hits,
+          description: buildDescription(query, distroData.popularity),
           thumb_url: scrape.getLogoUrl(distroData.distro.url_name),
           input_message_content: {
             message_text: JSON.stringify(distroData.popularity),
@@ -64,6 +61,21 @@ const formatAndSendQueryResults = (bot, query, results) => {
       { cache_time: 30 }
     )
   );
+};
+
+/**
+ * Builds short description based on popularity data.
+ * @param {object} query Query object.
+ * @param {object} popularity An object containing popularity data.
+ * @returns {string} Short description.
+ */
+const buildDescription = (query, popularity) => {
+  let str = '';
+  str += strings.t(query, strings.POPULARITY) + ': ';
+  str += popularity['6months'].rank + '\n';
+  str += strings.t(query, strings.HITS) + ': ';
+  str += popularity['6months'].hits + '\n';
+  return str;
 };
 
 module.exports = {

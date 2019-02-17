@@ -1,7 +1,13 @@
+/**
+ * Translated strings.
+ */
+
 // Message code constants for messages.
 exports.MESSAGE = 'MESSAGE';
 exports.START_TYPING = 'START_TYPING';
 exports.NO_RESULT = 'NO_RESULT';
+exports.POPULARITY = 'POPULARITY';
+exports.HITS = 'HITS';
 
 /**
  * Returns translated text based on user language.
@@ -25,7 +31,9 @@ const strings = {
       'Yani, herhangi bir sohbette ismimi yazarsanız ' +
       'sizin için birşeyler yapmaya çalışırım.',
     START_TYPING: 'Dağıtımın adını yazmaya başlayın...',
-    NO_RESULT: 'Aradığınız dağıtımı bulamadım!'
+    NO_RESULT: 'Aradığınız dağıtımı bulamadım!',
+    POPULARITY: 'Rağbet oranı',
+    HITS: 'Günlük ziyaret'
   },
   en: {
     MESSAGE:
@@ -33,6 +41,8 @@ const strings = {
       'So, you better start typing by my name in any chat and ' +
       'I will try to respond with a reasonable reply.',
     START_TYPING: 'Start typing the distro name...',
-    NO_RESULT: "I can't find the distro you're looking for!"
+    NO_RESULT: "I can't find the distro you're looking for!",
+    POPULARITY: 'Popularity',
+    HITS: 'Hits per day'
   }
 };
