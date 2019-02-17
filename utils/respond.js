@@ -1,5 +1,3 @@
-const path = require('path');
-const fs = require('fs-extra');
 const uuid = require('uuid/v4');
 const scrape = require('./scrape');
 const strings = require('../strings');
