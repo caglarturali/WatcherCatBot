@@ -8,12 +8,11 @@ const strings = require('./strings');
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const options = {
   webHook: {
-    // Just use 443 directly
-    port: 443
+    port: process.env.PORT
   }
 };
 
-const url = process.env.NOW_URL;
+const url = process.env.APP_URL;
 
 // Create a bot that uses 'polling' to fetch new updates.
 const bot = new TelegramBot(TOKEN, options);

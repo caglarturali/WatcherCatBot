@@ -1,9 +1,0 @@
-{
-  "alias": "watchercatbot.now.sh",
-  "version": 2,
-  "name": "watchercatbot",
-  "builds": [{ "src": "*.js", "use": "@now/node" }],
-  "env": {
-    "TELEGRAM_TOKEN": "@telegram_token"
-  }
-}
