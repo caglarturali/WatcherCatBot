@@ -1,20 +1,23 @@
 const uuid = require('uuid/v4');
 const scrape = require('./scrape');
+const strings = require('../strings');
 
 /**
  * Responds with a static message of type article.
  * @param {object} bot Telegram bot instance.
- * @param {*} query Query object.
+ * @param {object} query Query object.
+ * @param {string} title Title to display.
+ * @param {msgCode} msgCode Message code constant.
  */
-const sendStaticResponse = (bot, query) => {
+const sendStaticResponse = (bot, query, title, msgCode) => {
   bot.answerInlineQuery(query.id, [
     {
       type: 'article',
       id: uuid(),
-      title: ':(',
-      description: "I can't find the distro you're looking for!",
+      title: title,
+      description: strings.t(query, msgCode),
       input_message_content: {
-        message_text: "I can't find the distro you're looking for!",
+        message_text: strings.t(query, msgCode),
         parse_mode: 'Markdown',
         disable_web_page_preview: false
       }
