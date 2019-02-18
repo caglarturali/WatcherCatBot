@@ -7,10 +7,13 @@ const cheerio = require('cheerio');
 
 /**
  * Returns distro-specific DistroWatch page.
+ * * Append timestamp to get around unwanted cache!
  * @param {string} distro The url-friendly name of the distro.
  */
-const getDistroUrl = distro =>
-  `https://distrowatch.com/table.php?distribution=${distro}`;
+const getDistroUrl = distro => {
+  const timestamp = new Date().getTime().toString();
+  return `https://distrowatch.com/table.php?distribution=${distro}?t=${timestamp}`;
+};
 
 /**
  * Returns the url of the logo of given distro from public dir.
