@@ -1,33 +1,38 @@
 require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const TelegramBot = require('node-telegram-bot-api');
 const distrosData = require('./data/distros.json');
 const scrape = require('./utils/scrape');
 const respond = require('./utils/respond');
 const strings = require('./strings');
 
-// Required for static assets.
-const app = express();
-app.use(express.static('public'));
-app.listen(process.env.PORT, () => {
-  console.log(`Bot is listening on port ${process.env.PORT}`);
-});
-
 const TOKEN = process.env.TELEGRAM_TOKEN;
-const options = {
-  webHook: {
-    port: process.env.PORT
-  }
-};
+const URL = process.env.APP_URL;
+const PORT = process.env.PORT;
 
-const url = process.env.APP_URL;
-
-// Create a bot.
-const bot = new TelegramBot(TOKEN, options);
+const app = express();
+const bot = new TelegramBot(TOKEN);
 
 // This informs the Telegram servers of the new webhook.
 // Note: we do not need to pass in the cert, as it already provided
-bot.setWebHook(`${url}/bot${TOKEN}`);
+bot.setWebHook(`${URL}/bot${TOKEN}`);
+
+// Parse the updates to JSON.
+app.use(bodyParser.json());
+// Required for static assets.
+app.use(express.static('public'));
+
+// We are receiving updates at the route below!
+app.post(`/bot${TOKEN}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+// Start Express Server.
+app.listen(PORT, () => {
+  console.log(`Bot is listening on port ${process.env.PORT}`);
+});
 
 // Listen for any kind of message.
 bot.on('message', msg => {
