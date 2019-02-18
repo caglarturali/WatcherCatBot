@@ -1,9 +1,17 @@
 require('dotenv').config();
+const express = require('express');
 const TelegramBot = require('node-telegram-bot-api');
 const distrosData = require('./data/distros.json');
 const scrape = require('./utils/scrape');
 const respond = require('./utils/respond');
 const strings = require('./strings');
+
+// Required for static assets.
+const app = express();
+app.use(express.static('public'));
+app.listen(process.env.PORT, () => {
+  console.log(`Bot is listening on port ${process.env.PORT}`);
+});
 
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const options = {
