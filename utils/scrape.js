@@ -7,12 +7,10 @@ const cheerio = require('cheerio');
 
 /**
  * Returns distro-specific DistroWatch page.
- * * Append timestamp to get around unwanted cache!
  * @param {string} distro The url-friendly name of the distro.
  */
 const getDistroUrl = distro => {
-  const timestamp = new Date().getTime().toString();
-  return `https://distrowatch.com/table.php?distribution=${distro}?t=${timestamp}`;
+  return `https://distrowatch.com/table.php?distribution=${distro}`;
 };
 
 /**
@@ -64,6 +62,7 @@ const getDistroPopularity = distroObj => {
           dataStr.lastIndexOf('Average')
         );
         dataStr = dataStr.substring(dataStr.indexOf(keys['12months']));
+
         const result = {
           distro: {
             ...distroObj
@@ -87,8 +86,16 @@ const getDistroPopularity = distroObj => {
         resolve(result);
       })
       .catch(err => {
-        console.log(`Error while fetching details about ${distroObj.url_name}`);
-        reject(new Error(err));
+        console.log(
+          `Error while fetching details about ${distroObj.url_name}: ${err}`
+        );
+        // Resolve with null popularity object instead of rejecting!
+        resolve({
+          distro: {
+            ...distroObj
+          },
+          popularity: null
+        });
       });
 
     const getDataBetween = (rawData, startFrom, endWith) => {

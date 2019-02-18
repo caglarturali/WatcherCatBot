@@ -37,6 +37,9 @@ const formatAndSendQueryResults = (bot, query, results) => {
     return a.popularity['6months'].rank - b.popularity['6months'].rank;
   });
 
+  // Remove elements that do not contain popularity object.
+  results.filter(distroData => distroData.popularity !== null);
+
   bot.answerInlineQuery(
     query.id,
     results.map(
