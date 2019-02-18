@@ -14,10 +14,13 @@ const getDistroUrl = distro =>
 
 /**
  * Returns the url of the logo of given distro from public dir.
+ * Append timestamp to get around unwanted cache!
  * @param {string} distro The url-friendly name of the distro.
  */
-const getLogoUrl = distro =>
-  `${process.env.APP_URL}/logos/${distro}.jpg`;
+const getLogoUrl = distro => {
+  const timestamp = new Date().getTime().toString();
+  return `${process.env.APP_URL}/logos/${distro}.jpg?t=${timestamp}`;
+};
 
 /**
  * Returns popularity info of the given distro.
