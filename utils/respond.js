@@ -38,7 +38,7 @@ const formatAndSendQueryResults = (bot, query, results) => {
   });
 
   // Remove elements that do not contain popularity object.
-  results.filter(distroData => distroData.popularity !== null);
+  results = results.filter(distroData => distroData.popularity !== null);
 
   bot.answerInlineQuery(
     query.id,
