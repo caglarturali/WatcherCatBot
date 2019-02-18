@@ -9,12 +9,13 @@ const TOKEN = process.env.TELEGRAM_TOKEN;
 const options = {
   webHook: {
     port: process.env.PORT
-  }
+  },
+  polling: true
 };
 
 const url = process.env.APP_URL;
 
-// Create a bot that uses 'polling' to fetch new updates.
+// Create a bot.
 const bot = new TelegramBot(TOKEN, options);
 
 // This informs the Telegram servers of the new webhook.
@@ -44,9 +45,15 @@ bot.on('inline_query', query => {
 
   // Find matching distros.
   let matches = distrosData.filter(distroData => {
-    return distroData.distro_name
-      .toLowerCase()
-      .includes(query.query.toLowerCase());
+    // Look matches in both friendly name and url name.
+    const currentDistroName = distroData.distro_name.toLowerCase();
+    const currentDistroUrlName = distroData.url_name.toLowerCase();
+    const queryDistro = query.query.toLowerCase();
+
+    return (
+      queryDistro.indexOf(currentDistroName) >= 0 ||
+      queryDistro.indexOf(currentDistroUrlName) >= 0
+    );
   });
   if (matches.length > 10) {
     matches.length = 10;
