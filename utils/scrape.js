@@ -31,6 +31,7 @@ const getLogoUrl = distro => {
  * @returns {Promise<Object>} Popularity info of the given distro.
  */
 const getDistroPopularity = distroObj => {
+  console.log(`Scraping DW for ${distroObj.url_name}`);
   return new Promise((resolve, reject) => {
     // Request-promise options.
     const options = {
