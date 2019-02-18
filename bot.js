@@ -44,7 +44,7 @@ bot.on('inline_query', query => {
 
   // Find matching distros.
   let matches = distrosData.filter(distroData => {
-    // Look matches in both friendly name and url name.
+    // Look for matches in both friendly name and url name.
     const currentDistroName = distroData.distro_name.toLowerCase();
     const currentDistroUrlName = distroData.url_name.toLowerCase();
     const queryDistro = query.query.toLowerCase();
