@@ -7,7 +7,9 @@
     "start": "node bot.js",
     "watch": "./node_modules/nodemon/bin/nodemon.js bot.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update-distros-data": "node scripts/updateDistrosData.js && node ./node_modules/prettier/bin-prettier.js --write data/distros.json"
+    "update-static-data": "yarn run download-distro-data && yarn run download-distro-logos",
+    "download-distro-data": "node ./scripts/updateDistrosData.js && node ./node_modules/prettier/bin-prettier.js --write data/distros.json",
+    "download-distro-logos": "node ./scripts/downloadDistroImages.js"
   },
   "author": "Caglar Turali <caglarturali@gmail.com>",
   "license": "ISC",
@@ -25,6 +27,7 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.10",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "sharp": "^0.21.3"
   }
 }

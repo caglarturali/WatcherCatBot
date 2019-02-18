@@ -13,11 +13,11 @@ const getDistroUrl = distro =>
   `https://distrowatch.com/table.php?distribution=${distro}`;
 
 /**
- * Returns the url of the logo of given distro.
+ * Returns the url of the logo of given distro from public dir.
  * @param {string} distro The url-friendly name of the distro.
  */
 const getLogoUrl = distro =>
-  `https://distrowatch.com/images/yvzhuwbpy/${distro}.png`;
+  `${process.env.APP_URL}/public/logos/${distro}.png`;
 
 /**
  * Returns popularity info of the given distro.
