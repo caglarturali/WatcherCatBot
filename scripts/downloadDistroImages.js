@@ -16,12 +16,25 @@ const distros = require('../data/distros.json');
 const downloadAndConvertImage = url_name => {
   return new Promise((resolve, reject) => {
     const logoUrl = `https://distrowatch.com/images/yvzhuwbpy/${url_name}.png`;
+    const canvasBg = { r: 255, g: 255, b: 255, alpha: 1 };
+    const extendBy = 8;
 
     request(logoUrl, { encoding: null })
       .then(imgBuffer => {
         sharp(imgBuffer)
           .flatten({
-            background: { r: 255, g: 255, b: 255, alpha: 1 }
+            background: canvasBg
+          })
+          .resize(128, 128, {
+            fit: 'contain',
+            background: canvasBg
+          })
+          .extend({
+            top: extendBy,
+            bottom: extendBy,
+            left: extendBy,
+            right: extendBy,
+            background: canvasBg
           })
           .jpeg({ quality: 85 })
           .toBuffer()
