@@ -17,7 +17,7 @@ const getDistroUrl = distro =>
  * @param {string} distro The url-friendly name of the distro.
  */
 const getLogoUrl = distro =>
-  `${process.env.APP_URL}/public/logos/${distro}.jpg`;
+  `${process.env.APP_URL}/logos/${distro}.jpg`;
 
 /**
  * Returns popularity info of the given distro.
