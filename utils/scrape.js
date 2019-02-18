@@ -87,6 +87,7 @@ const getDistroPopularity = distroObj => {
         resolve(result);
       })
       .catch(err => {
+        console.log(`Error while fetching details about ${distroObj.url_name}`);
         reject(new Error(err));
       });
 
