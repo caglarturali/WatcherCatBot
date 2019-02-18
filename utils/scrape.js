@@ -57,9 +57,17 @@ const getDistroPopularity = distroObj => {
       .then(data => {
         // Extract necessary info.
         let dataStr = data.text();
+
+        let endingDelimeter = '';
+        if (dataStr.indexOf('Average') !== -1) {
+          endingDelimeter = 'Average';
+        } else {
+          endingDelimeter = 'Visitor';
+        }
+
         dataStr = dataStr.substring(
           dataStr.lastIndexOf('Popularity'),
-          dataStr.lastIndexOf('Average')
+          dataStr.lastIndexOf(endingDelimeter)
         );
         dataStr = dataStr.substring(dataStr.indexOf(keys['12months']));
 
