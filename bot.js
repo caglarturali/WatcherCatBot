@@ -50,8 +50,8 @@ bot.on('inline_query', query => {
     const queryDistro = query.query.toLowerCase();
 
     return (
-      queryDistro.indexOf(currentDistroName) >= 0 ||
-      queryDistro.indexOf(currentDistroUrlName) >= 0
+      currentDistroName.indexOf(queryDistro) >= 0 ||
+      currentDistroUrlName.indexOf(queryDistro) >= 0
     );
   });
   if (matches.length > 10) {
