@@ -9,8 +9,7 @@ const TOKEN = process.env.TELEGRAM_TOKEN;
 const options = {
   webHook: {
     port: process.env.PORT
-  },
-  polling: true
+  }
 };
 
 const url = process.env.APP_URL;
