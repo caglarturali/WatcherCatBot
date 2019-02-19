@@ -12,6 +12,14 @@
   },
   "routes": [
     { "src": "/public/logos/(.*)", "dest": "/public/logos/$1" },
-    { "src": "/(.*)", "dest": "bot.js" }
+    {
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+      },
+      "src": "/(.*)",
+      "dest": "bot.js"
+    }
   ]
 }
