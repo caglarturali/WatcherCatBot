@@ -94,7 +94,7 @@ bot.on('polling_error', error => {
 module.exports = async (req, res) => {
   if (req.method === 'POST') {
     const data = await json(req);
-    bot.processUpdate(data);
+    bot.processUpdate(...data);
     res.sendStatus(200);
   }
 };
