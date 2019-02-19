@@ -14,8 +14,9 @@ const app = express();
 const bot = new TelegramBot(TOKEN);
 
 // This informs the Telegram servers of the new webhook.
-// Note: we do not need to pass in the cert, as it already provided
 bot.setWebHook(`${URL}/bot${TOKEN}`);
+// Delete Heroku webhook.
+// bot.deleteWebHook(`https://watchercatbot.herokuapp.com/bot${TOKEN}`)
 
 // Parse the updates to JSON.
 app.use(bodyParser.json());
