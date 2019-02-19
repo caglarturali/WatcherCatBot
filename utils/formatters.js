@@ -79,7 +79,7 @@ const buildMessageText = (query, distroData) => {
   const infoLineStr = 't.me/deepintr';
   output += centeredText(infoLineStr) + '\n' + OUTER_DIVIDER;
 
-  return '```' + output + '```';
+  return '```' + '\n' + output + '\n' + '```';
 };
 
 module.exports = {
