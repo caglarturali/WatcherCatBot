@@ -20,8 +20,6 @@ bot.setWebHook(`${URL}/bot${TOKEN}`);
 
 // Parse the updates to JSON.
 app.use(bodyParser.json());
-// Required for static assets.
-app.use(express.static('public'));
 
 // We are receiving updates at the route below!
 app.post(`/bot${TOKEN}`, (req, res) => {
@@ -32,11 +30,6 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 // Redirect all other requests to homepage of the bot.
 app.get('/*', (req, res) => {
   res.redirect('https://t.me/WatcherCatBot');
-});
-
-// Start Express Server.
-app.listen(PORT, () => {
-  console.log(`Bot is listening on port ${process.env.PORT}`);
 });
 
 // Listen for any kind of message.
@@ -97,3 +90,5 @@ bot.on('inline_query', query => {
 bot.on('polling_error', error => {
   console.log('Polling error:', error.code);
 });
+
+module.exports = app;

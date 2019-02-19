@@ -2,11 +2,16 @@
   "version": 2,
   "name": "watchercatbot",
   "alias": "watchercatbot.now.sh",
-  "builds": [{ "src": "*.js", "use": "@now/node" }],
+  "builds": [
+    { "src": "bot.js", "use": "@now/node" },
+    { "src": "**/*.jpg", "use": "@now/static" }
+  ],
   "env": {
     "TELEGRAM_TOKEN": "@telegram_token",
-    "APP_URL": "https://watchercatbot.now.sh",
-    "PORT": "443"
+    "APP_URL": "https://watchercatbot.now.sh"
   },
-  "routes": [{ "src": "/(.*)", "dest": "bot.js" }]
+  "routes": [
+    { "src": "/public/logos/(.*)", "dest": "/public/logos/$1" },
+    { "src": "/(.*)", "dest": "bot.js" }
+  ]
 }

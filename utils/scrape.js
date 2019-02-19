@@ -20,7 +20,7 @@ const getDistroUrl = distro => {
  */
 const getLogoUrl = distro => {
   const timestamp = new Date().getTime().toString();
-  return `${process.env.APP_URL}/logos/${distro}.jpg?t=${timestamp}`;
+  return `${process.env.APP_URL}/public/logos/${distro}.jpg?t=${timestamp}`;
 };
 
 /**
