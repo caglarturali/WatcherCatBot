@@ -4,7 +4,7 @@
   "description": "The distro watcher cat",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
+    "start": "micro",
     "watch": "./node_modules/nodemon/bin/nodemon.js bot.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "update-static-data": "yarn run download-distro-data && yarn run download-distro-logos",
@@ -18,10 +18,9 @@
     "url": "https://github.com/caglarturali/WatcherCatBot"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^6.2.0",
-    "express": "^4.16.4",
+    "micro": "^9.3.3",
     "node-telegram-bot-api": "^0.30.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",

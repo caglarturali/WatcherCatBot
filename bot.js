@@ -1,6 +1,7 @@
 require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
+// const express = require('express');
+// const bodyParser = require('body-parser');
+const { send, createError, json } = require('micro');
 const TelegramBot = require('node-telegram-bot-api');
 const distrosData = require('./data/distros.json');
 const scrape = require('./utils/scrape');
@@ -10,25 +11,25 @@ const strings = require('./strings');
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const URL = process.env.APP_URL;
 
-const app = express();
+// const app = express();
 const bot = new TelegramBot(TOKEN);
 
 // This informs the Telegram servers of the new webhook.
 bot.setWebHook(`${URL}/bot${TOKEN}`);
 
 // Parse the updates to JSON.
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // We are receiving updates at the route below!
-app.post(`/bot${TOKEN}`, (req, res) => {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
-});
+// app.post(`/bot${TOKEN}`, (req, res) => {
+//   bot.processUpdate(req.body);
+//   res.sendStatus(200);
+// });
 
 // Redirect all other requests to homepage of the bot.
-app.get('/*', (req, res) => {
-  res.redirect('https://t.me/WatcherCatBot');
-});
+// app.get('/*', (req, res) => {
+//   res.redirect('https://t.me/WatcherCatBot');
+// });
 
 // Listen for any kind of message.
 bot.on('message', msg => {
@@ -89,4 +90,11 @@ bot.on('polling_error', error => {
   console.log('Polling error:', error.code);
 });
 
-module.exports = app;
+// module.exports = app;
+module.exports = async (req, res) => {
+  if (req.method === 'POST') {
+    const data = await json(req);
+    bot.processUpdate(data);
+    res.sendStatus(200);
+  }
+};
