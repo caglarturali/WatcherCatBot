@@ -3,7 +3,7 @@
   "name": "watchercatbot",
   "alias": "watchercatbot.now.sh",
   "builds": [
-    { "src": "bot.js", "use": "@now/node" },
+    { "src": "**/*.js", "use": "@now/node" },
     { "src": "**/*.jpg", "use": "@now/static" }
   ],
   "env": {

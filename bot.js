@@ -9,7 +9,6 @@ const strings = require('./strings');
 
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const URL = process.env.APP_URL;
-const PORT = process.env.PORT;
 
 const app = express();
 const bot = new TelegramBot(TOKEN);
