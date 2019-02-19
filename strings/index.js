@@ -7,7 +7,9 @@ exports.MESSAGE = 'MESSAGE';
 exports.START_TYPING = 'START_TYPING';
 exports.NO_RESULT = 'NO_RESULT';
 exports.POPULARITY = 'POPULARITY';
+exports.POPULARITY_SHORT = 'POPULARITY_SHORT';
 exports.HITS = 'HITS';
+exports.HITS_SHORT = 'HITS_SHORT';
 exports.MONTHS12 = 'MONTHS12';
 exports.MONTHS6 = 'MONTHS6';
 exports.MONTHS3 = 'MONTHS3';
@@ -39,12 +41,14 @@ const strings = {
     START_TYPING: 'Dağıtımın adını yazmaya başlayın...',
     NO_RESULT: 'Aradığınız dağıtımı bulamadım!',
     POPULARITY: 'Rağbet oranı',
+    POPULARITY_SHORT: 'Sıra',
     HITS: 'Günlük ziyaret',
+    HITS_SHORT: 'Hit',
     MONTHS12: '12 ay',
     MONTHS6: '6 ay',
     MONTHS3: '3 ay',
-    WEEKS4: '4 hafta',
-    WEEKS1: '1 hafta',
+    WEEKS4: '4 ha',
+    WEEKS1: '1 ha',
     MORE: 'Dağıtımın DistroWatch sayfasını aç.'
   },
   en: {
@@ -55,12 +59,14 @@ const strings = {
     START_TYPING: 'Start typing the distro name...',
     NO_RESULT: "I can't find the distro you're looking for!",
     POPULARITY: 'Popularity',
+    POPULARITY_SHORT: 'Rank',
     HITS: 'Hits per day',
-    MONTHS12: '12 months',
-    MONTHS6: '6 months',
-    MONTHS3: '3 months',
-    WEEKS4: '4 weeks',
-    WEEKS1: '1 week',
+    HITS_SHORT: 'Hits',
+    MONTHS12: '12 mo',
+    MONTHS6: '6 mo',
+    MONTHS3: '3 mo',
+    WEEKS4: '4 we',
+    WEEKS1: '1 we',
     MORE: 'View on DistroWatch.'
   }
 };
