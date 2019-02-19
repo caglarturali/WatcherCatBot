@@ -10,25 +10,25 @@ const strings = require('./strings');
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const URL = process.env.APP_URL;
 
-// const app = express();
-const bot = new TelegramBot(TOKEN, { webHook: { port: 443 } });
+const app = express();
+const bot = new TelegramBot(TOKEN);
 
 // This informs the Telegram servers of the new webhook.
 bot.setWebHook(`${URL}/bot${TOKEN}`);
 
 // Parse the updates to JSON.
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 // We are receiving updates at the route below!
-// app.post(`/bot${TOKEN}`, (req, res) => {
-//   bot.processUpdate(req.body);
-//   res.sendStatus(200);
-// });
+app.post(`/bot${TOKEN}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
 
-// // Redirect all other requests to homepage of the bot.
-// app.get('/*', (req, res) => {
-//   res.redirect('https://t.me/WatcherCatBot');
-// });
+// Redirect all other requests to homepage of the bot.
+app.get('/*', (req, res) => {
+  res.redirect('https://t.me/WatcherCatBot');
+});
 
 // Listen for any kind of message.
 bot.on('message', msg => {
@@ -89,4 +89,4 @@ bot.on('polling_error', error => {
   console.log('Polling error:', error.code);
 });
 
-// module.exports = app;
+module.exports = app;
