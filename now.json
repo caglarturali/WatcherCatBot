@@ -3,7 +3,7 @@
   "name": "watchercatbot",
   "alias": "watchercatbot.now.sh",
   "builds": [
-    { "src": "bot.js", "use": "@now/node" },
+    { "src": "bot.js", "use": "@now/node-server" },
     { "src": "**/*.jpg", "use": "@now/static" }
   ],
   "env": {
@@ -12,7 +12,6 @@
   },
   "routes": [
     { "src": "/public/logos/(.*)", "dest": "/public/logos/$1" },
-    { "src": "/bot(.*)", "methods": ["POST"], "dest": "/bot$1" },
     {
       "headers": {
         "Access-Control-Allow-Origin": "*",
