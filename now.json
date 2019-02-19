@@ -5,6 +5,8 @@
   "builds": [{ "src": "*.js", "use": "@now/node" }],
   "env": {
     "TELEGRAM_TOKEN": "@telegram_token",
-    "APP_URL": "https://watchercatbot.now.sh"
-  }
+    "APP_URL": "https://watchercatbot.now.sh",
+    "PORT": "443"
+  },
+  "routes": [{ "src": "/(.*)", "dest": "bot.js" }]
 }

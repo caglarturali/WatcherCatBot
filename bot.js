@@ -9,7 +9,7 @@ const strings = require('./strings');
 
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const URL = process.env.APP_URL;
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT;
 
 const app = express();
 const bot = new TelegramBot(TOKEN);
@@ -30,7 +30,7 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 });
 
 // Redirect all other requests to homepage of the bot.
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.redirect('https://t.me/WatcherCatBot');
 });
 
