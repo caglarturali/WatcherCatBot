@@ -3,7 +3,7 @@
   "name": "watchercatbot",
   "alias": "watchercatbot.now.sh",
   "builds": [
-    { "src": "bot.js", "use": "@now/node-server" },
+    { "src": "bot.js", "use": "@now/node" },
     { "src": "**/*.jpg", "use": "@now/static" }
   ],
   "env": {
@@ -18,7 +18,7 @@
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
       },
-      "src": "/.*",
+      "src": "/(.*)",
       "dest": "bot.js"
     }
   ]
