@@ -8,7 +8,7 @@
   ],
   "env": {
     "TELEGRAM_TOKEN": "@telegram_token",
-    "APP_URL": "https://watchercatbot.now.sh"
+    "APP_URL": "@app_url"
   },
   "routes": [
     { "src": "/public/logos/(.*)", "dest": "/public/logos/$1" },
