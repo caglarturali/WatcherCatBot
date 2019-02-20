@@ -19,14 +19,16 @@ bot.setWebHook(`${URL}/bot${TOKEN}`);
 // Parse the updates to JSON.
 app.use(bodyParser.json());
 
-// app.post('*', (req, res) => {
-//   res.json({ token: TOKEN, headers: req.headers });
-// });
+// We are receiving updates at the route below!
+app.post(`/bot${TOKEN}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
 
-// // Redirect all other requests to homepage of the bot.
-// app.get('*', (req, res) => {
-//   res.redirect('https://t.me/WatcherCatBot');
-// });
+// Redirect all other requests to homepage of the bot.
+app.get('*', (req, res) => {
+  res.redirect('https://t.me/WatcherCatBot');
+});
 
 // Listen for any kind of message.
 bot.on('message', msg => {
@@ -85,12 +87,6 @@ bot.on('inline_query', query => {
 
 bot.on('polling_error', error => {
   console.log('Polling error:', error.code);
-});
-
-// We are receiving updates at the route below!
-app.post(`/bot${TOKEN}`, (req, res) => {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
 });
 
 module.exports = app;
