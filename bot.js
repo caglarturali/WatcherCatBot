@@ -26,7 +26,7 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 });
 
 app.post('*', (req, res) => {
-  res.json(req.headers);
+  res.json({ token: TOKEN, headers: req.headers });
 });
 
 // Redirect all other requests to homepage of the bot.
