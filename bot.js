@@ -25,6 +25,10 @@ app.post(`/bot${TOKEN}`, (req, res) => {
   res.sendStatus(200);
 });
 
+app.post('*', (req, res) => {
+  res.json(req.headers);
+});
+
 // Redirect all other requests to homepage of the bot.
 app.get('*', (req, res) => {
   res.redirect('https://t.me/WatcherCatBot');
