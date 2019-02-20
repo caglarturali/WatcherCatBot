@@ -22,7 +22,8 @@ app.use(bodyParser.json());
 // We are receiving updates at the route below!
 app.post(`/bot${TOKEN}`, (req, res) => {
   bot.processUpdate(req.body);
-  res.sendStatus(200);
+  // res.sendStatus(200);
+  res.json(req.body);
 });
 
 // app.post('*', (req, res) => {
